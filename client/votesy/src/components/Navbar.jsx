@@ -4,6 +4,7 @@ import { useState } from "react";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { NavLink } from "react-router-dom";
 import MenuSvg from "./MenuSvg";
+import VoteButton from "./VoteButton";
 
 const Navbar = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
@@ -31,7 +32,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 border-b-[2px] border-pink-400 shadow-sm ${
+      className={`fixed top-0 bg-white left-0 w-full z-50 border-b-[2px] border-pink-400  shadow-sm ${
         openNavigation ? "bg-n-8" : "bg-n-8/90"
       }`}
     >
@@ -45,13 +46,13 @@ const Navbar = () => {
             openNavigation ? "flex" : "hidden"
           } fixed top-[5rem] left-0 right-0 bottom-0 bg-n-8 lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
-          <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
+          <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row bg-white">
             {navigation.map((item) => (
               <NavLink
                 key={item.id}
                 to={item.url}
                 onClick={handleClick}
-                className={`block relative text-2xl uppercase hover:text-blue-400 ${
+                className={`block relative text-2xl uppercase font-poppins hover:text-pink-600 ${
                   item.onlyMobile ? "lg:hidden" : ""
                 } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-sm lg:font-semibold`}
               >
@@ -64,11 +65,9 @@ const Navbar = () => {
           to="/signup"
           className="hidden lg:block mr-8"
         >
-          New account
+          <VoteButton/>
         </NavLink>
-        <NavLink className="hidden lg:flex" to="/signin">
-          Sign in
-        </NavLink>
+  
 
         <NavLink className="ml-auto lg:hidden border border-pink-600 border-dashed py-4 px-2 text-pink-400" onClick={toggleNavigation}>
           <MenuSvg openNavigation={openNavigation} />
