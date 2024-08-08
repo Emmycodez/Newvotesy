@@ -22,6 +22,7 @@ const port = process.env.MY_PORT;
 const region = "eu-north-1";
 const bucketName = "votesy-files";
 const accessKeyId = process.env.MY_AWS_ACCESS_KEY;
+const secretAccessKey = process.env.MY_SECRET_ACCESS_KEY
 
 
 if (!accessKeyId || !secretAccessKey) {
