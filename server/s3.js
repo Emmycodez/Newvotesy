@@ -8,8 +8,8 @@ dotenv.config();
 
 const region = "eu-north-1";
 const bucketName = "votesy-files";
-const accessKeyId = process.env.AWS_ACCESS_KEY;
-const secretAccessKey = process.env.SECRET_ACCESS_KEY;
+const accessKeyId = process.env.MY_AWS_ACCESS_KEY;
+const secretAccessKey = process.env.MY_SECRET_ACCESS_KEY;
 
 if (!accessKeyId || !secretAccessKey) {
   throw new Error("AWS_ACCESS_KEY and SECRET_ACCESS_KEY must be set in the .env file");

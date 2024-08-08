@@ -12,13 +12,17 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.MY_PORT;
+
+
+// Use these variables in your application
+
 
 // Ensure these are defined before using them
 const region = "eu-north-1";
 const bucketName = "votesy-files";
-const accessKeyId = process.env.AWS_ACCESS_KEY;
-const secretAccessKey = process.env.SECRET_ACCESS_KEY;
+const accessKeyId = process.env.MY_AWS_ACCESS_KEY;
+
 
 if (!accessKeyId || !secretAccessKey) {
   throw new Error("AWS_ACCESS_KEY and SECRET_ACCESS_KEY must be set in the .env file");
@@ -34,7 +38,7 @@ const s3 = new S3Client({
 });
 
 // Google Sheets API setup
-const CREDENTIALS_PATH = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+const CREDENTIALS_PATH = process.env.MY_GOOGLE_SERVICE_ACCOUNT_JSON;
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const sheets = google.sheets("v4");
 
@@ -47,7 +51,7 @@ app.use(
   })
 );
 
-const db = process.env.CONNECTION_STRING;
+const db = process.env.MY_CONNECTION_STRING;
 connectDB(db);
 
 async function authorize() {
@@ -61,7 +65,7 @@ async function authorize() {
 
 async function appendData(auth, range, values) {
   const sheets = google.sheets({ version: "v4", auth });
-  const spreadsheetId = process.env.SPREADSHEET_ID;
+  const spreadsheetId = process.env.MY_SPREADSHEET_ID;
   const resource = {
     values,
   };
