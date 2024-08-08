@@ -82,7 +82,7 @@ const ContestantUpload = () => {
 
   const deleteFile = async (key) => {
     try {
-      const response = await axios.delete("http://localhost:5100/api/deleteFile", {
+      const response = await axios.delete("https://votesy-server.vercel.app/api/deleteFile", {
         data: { key }
       });
       if (response.status === 200) {

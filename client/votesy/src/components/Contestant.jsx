@@ -7,7 +7,7 @@ const Contestant = () => {
 
     const fetchContestants = async () => {
         try {
-            const response = await axios.get("http://localhost:5100/api/userFiles");
+            const response = await axios.get("https://votesy-server.vercel.app/api/userFiles");
             console.log("Fetched images:", response.data);
 
             const urls = response.data.urls;
