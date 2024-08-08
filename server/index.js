@@ -13,7 +13,7 @@ dotenv.config();
 
 const app = express();
 
-const port = process.env.MY_PORT
+
 
 
 const corsOptions = {
@@ -184,6 +184,6 @@ app.delete("/api/deleteFile", async (request, response) => {
   }
 });
 
-app.listen(port, () => {
+app.listen( () => {
   console.log(`Server is running`);
 });

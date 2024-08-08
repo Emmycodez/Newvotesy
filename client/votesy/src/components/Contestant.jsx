@@ -4,7 +4,6 @@ import EachContestant from "./EachContestant";
 
 const Contestant = () => {
     const [images, setImages] = useState([]);
-
     const fetchContestants = async () => {
         try {
             const response = await axios.get("https://votesy-server.vercel.app/api/userFiles");

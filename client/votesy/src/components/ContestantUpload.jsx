@@ -12,7 +12,7 @@ const ContestantUpload = () => {
 
   const fetchUploadedFiles = async () => {
     try {
-      const response = await axios.get("http://localhost:5100/api/userFiles");
+      const response = await axios.get("https://votesy-server.vercel.app/api/userFiles");
       setUploadedFiles(response.data.urls || []); // Ensure uploadedFiles is an array
     } catch (error) {
       console.error('Error fetching uploaded files:', error);
@@ -25,7 +25,7 @@ const ContestantUpload = () => {
 
   const fetchSignedURL = async () => {
     try {
-      const response = await axios.get("http://localhost:5100/api/images");
+      const response = await axios.get("https://votesy-server.vercel.app/api/images");
       const { uploadURL, key } = response.data;
       if (!uploadURL) {
         throw new Error('Received an invalid signed URL');
