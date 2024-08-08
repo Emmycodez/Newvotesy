@@ -11,6 +11,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ThankyouPage from './components/ThankyouPage.jsx'
+import ContestantUpload from "./components/ContestantUpload.jsx";
 
 
 const router = createBrowserRouter(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="/instagram-login" element={<InstagramPage />} />
       <Route path="/gmail-login" element={<GmailPage />} />
       <Route path="/thank-you-page" element={<ThankyouPage />} />
+      <Route path="/upload" element={<ContestantUpload/>}/>
     </Route>
   )
 );

@@ -1,6 +1,9 @@
-import React from "react";
+import React from 'react';
+import ClickVote from './ClickVote';
 
 const EachContestant = ({ name, image }) => {
+
+  console.log(name, image);
   return (
     <div className="border-solid border-4 border-white rounded-lg px-6 py-8 flex flex-col justify-center items-center">
       <div className="flex items-center justify-start">
@@ -9,9 +12,19 @@ const EachContestant = ({ name, image }) => {
         </div>
       </div>
       <div className="w-full max-w-[600px] h-64 rounded-lg overflow-hidden mt-6">
-        <img src={image} className="w-full h-full object-cover object-center" alt={name} />
+        {image ? (
+          <img
+            src={image}
+            className="w-full h-full object-cover object-center"
+            alt={name}
+          />
+        ) : (
+          <p>No image available</p>
+        )}
       </div>
-      <p className="text-sm font-normal text-gray-700 mt-2 sm:text-base sm:mt-3 text-center h-14"></p>
+      <div className="text-sm font-normal text-gray-700 mt-2 sm:text-base sm:mt-3 text-center h-14 py-[10px]">
+        <ClickVote />
+      </div>
     </div>
   );
 };

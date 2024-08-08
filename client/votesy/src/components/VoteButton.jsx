@@ -1,17 +1,22 @@
-import React from 'react'
+import React,{useState} from "react";
 import { MdWhereToVote } from "react-icons/md";
+import Modal from "./Modal";
 
 const VoteButton = () => {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <button
-    type="button"
-    className="inline-flex items-center justify-center bg-pink-700 text-lg font-semibold text-white shadow-sm transition-all duration-150 rounded-xl hover:bg-pink-500 py-3 px-5 sm:py-4 sm:px-16 w-full sm:w-auto"
-    href=""
-  >
-    Vote Your Favorite
-    <MdWhereToVote className='text-white' />
-  </button>
-  )
-}
+      type="button"
+      onClick={() => {
+        setOpenModal(true);
+      }}
+      className="inline-flex items-center justify-center bg-pink-600 text-lg font-semibold text-white shadow-sm transition-all duration-150 rounded-xl pl-8 pr-5 py-4 hover:bg-pink-400  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+    >
+      Vote Your Favorite
+      <MdWhereToVote className="text-white mx-[7px]" />
+      {openModal && <Modal closeModal={setOpenModal} />}
+    </button>
+  );
+};
 
-export default VoteButton
+export default VoteButton;

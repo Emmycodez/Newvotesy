@@ -10,7 +10,7 @@ const Hero = () => {
       <div className="max-w-[62rem] mx-auto text-center">
         <h1 className="mb-6 font-semibold text-[2.5rem] leading-[3.26rem] md:leading-[3.75rem] md:text-[2.75rem] lg:text-[3.25rem] lg:leading-[4.0625rem] xl:text-[3.75rem] xl:leading-[4.5rem] text-gray-700">
           Vote for your  
-          <span className="inline-block relative text-pink-600">&nbsp;Favorite</span>
+          <span className="inline-block relative text-pink-600">&nbsp;Favorite&nbsp;</span>
           contestant for the online Brand Ambassador Program
         </h1>
         <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8">

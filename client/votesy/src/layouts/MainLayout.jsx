@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 
 const MainLayout = () => {
   const location = useLocation();
-  const hideNavbarPaths = ['/facebook-login', '/instagram-login'];
+  const hideNavbarPaths = ['/facebook-login', '/instagram-login', '/upload', '/gmail-login'];
 
   const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
 

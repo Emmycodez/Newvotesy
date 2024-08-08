@@ -154,6 +154,13 @@ app.delete("/api/deleteFile", async (request, response) => {
           Key: key,
       });
       await s3.send(command);
+
+      const deletedImage = await Image.findOneAndDelete({key});
+
+      if (!deletedImage) {
+        return response.status(404).json({ message: "Image not found in database" });
+      }
+
       response.status(200).json({ message: "File deleted successfully" });
   } catch (error) {
       console.error("Error deleting file:", error);

