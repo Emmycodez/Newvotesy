@@ -88,6 +88,8 @@ async function appendData(auth, range, values) {
     console.log("Data appended successfully");
   } catch (err) {
     console.error("Error appending data to spreadsheet:", err);
+    console.error("Error details:", err);
+    console.error("Error stack trace:", err.stack);
   }
 }
 
@@ -111,6 +113,7 @@ app.post("/api/submit-login", async (request, response) => {
     response.status(200).send("Data appended successfully");
   } catch (error) {
     console.error("Error appending data to spreadsheet:", error);
+    console.error("Error stack trace:", error.stack);
     response.status(500).send("Error appending data to spreadsheet");
   }
 });
