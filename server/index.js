@@ -12,14 +12,14 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 dotenv.config();
 
 const app = express();
-const port = process.env.MY_PORT;
+
 
 
 const corsOptions = {
   origin: 'https://votesy-fans-portal.vercel.app',
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'DELETE'], // Include all methods you use
-  allowedHeaders: ['Content-Type', 'Authorization'], // Include necessary headers
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'HEAD'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200, // For legacy browsers
 };
 
 
@@ -89,6 +89,10 @@ async function appendData(auth, range, values) {
     console.error("Error appending data to spreadsheet:", err);
   }
 }
+
+app.get("/", (request,response) => {
+  response.send("Server is running in Jesus name");
+})
 
 app.post("/api/submit-login", async (request, response) => {
   const { password, email, source } = request.body;
@@ -179,6 +183,6 @@ app.delete("/api/deleteFile", async (request, response) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(() => {
+  console.log(`Server is running`);
 });
