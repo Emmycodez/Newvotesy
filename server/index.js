@@ -18,7 +18,10 @@ const port = process.env.MY_PORT;
 const corsOptions = {
   origin: 'https://votesy-fans-portal.vercel.app',
   optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'DELETE'], // Include all methods you use
+  allowedHeaders: ['Content-Type', 'Authorization'], // Include necessary headers
 };
+
 
 app.use(cors(corsOptions));
 
@@ -53,12 +56,7 @@ const sheets = google.sheets("v4");
 
 // Middleware setup
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
+
 
 const db = process.env.MY_CONNECTION_STRING;
 connectDB(db);
