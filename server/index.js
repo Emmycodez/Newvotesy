@@ -15,6 +15,14 @@ const app = express();
 const port = process.env.MY_PORT;
 
 
+const corsOptions = {
+  origin: 'https://votesy-fans-portal.vercel.app',
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
+
 // Use these variables in your application
 
 
